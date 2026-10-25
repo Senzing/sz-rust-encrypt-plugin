@@ -16,5 +16,7 @@ base64 = { workspace = true }
 zeroize = { workspace = true }
 libc = { workspace = true }
 
-[dev-dependencies]
-proptest = { workspace = true }
+# libc is used by the code that sz_common::declare_c_interface! expands into this crate;
+# cargo-machete cannot see macro-expanded uses.
+[package.metadata.cargo-machete]
+ignored = ["libc"]
